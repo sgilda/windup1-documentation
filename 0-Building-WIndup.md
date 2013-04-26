@@ -1,0 +1,9 @@
+## Building Windup
+
+Before the first build, one must first install included jars bundled with windup by executing:
+* `mvn initialize`
+
+To build the windup artifact from the source, execute the following:
+* `mvn clean package`
+
+The **windup-cli/target/windup-cli-x.y.z-bin/** (where x.y.z is the version) directory will contained the compiled Windup application bundled with all its dependencies.  The windup-cli.jar in the target folder does not contain all the dependencies and will throw a ClassNotFoundException if used.
