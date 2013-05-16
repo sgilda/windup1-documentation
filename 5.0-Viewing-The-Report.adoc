@@ -1,25 +1,28 @@
-![Windup Main](img/5-main-menu.png)
-***
+image:5-main-menu.png[Windup Main]
 
-## 5.1 Ten Thousand Foot View
+5.1 Ten Thousand Foot View
+--------------------------
 
 Windup will produce an HTML Report.  The `index.html` file is the "10,000 foot" view of the application.  This report is the central point which links to all resource reports.  This main report looks to provide overviews of all resources of interest.  The top of the report displays a graph, collecting all potential changes that would need to be modified in the application to provide a quick, high level view of the effort involved in migrating the application.
 
-### 5.1.1 Story Points
+5.1.1 Story Points
+------------------
 
 Story points are a measure of effort in Agile methodology.  Each team has different skill sets, and those skill sets translate to different levels of effort.  Therefore, Windup presents story points, allowing each team to decide how much time to assign per point.  Experienced teams will find that each story point takes an hourto "1 hour" each whilst other teams may find other each story point takes longer.  Most teams will find that as they perform each migration they will complete each story point faster (since they will be developing skills along the way to increase their migration knowledge and therefore decrease their hours effort moving forward).
 
 Windup allocates story points only for things it recognizes, and adding and adjusting the story points associated with each potential change is easy with Windup.  In the next section on Building Rules, we will discuss adding and adjusting story points to the Windup output.
 
-### The Pie Chart
+5.1.2 The Pie Chart
+-------------------
 
 At the top of the report, and with each archive analysed, Windup displays a pie chart.  The pie chart is a high level summary of the potential changes that must occur to have the application compatible within the target platform.  It is a great way of quickly viewing the main changes needed.  If you don't see the packages belonging to the server you are migrating from outlined in the Windup report, chances are the effort to migrate is quite low!
 
-### Archive Views
+5.1.3 Archive Views
+-------------------
 
 The archive views show each archive in the 10,000 foot view, and describe and link to the resources of interest within the report.
 
-![Archive Views](img/6-archive-overview.png)
+image:6-archive-overview.png[Archive Views]
 
 The classifications are helpful to recognize the resources, and each resource's effort is displayed (as story points) next to the resource.
 

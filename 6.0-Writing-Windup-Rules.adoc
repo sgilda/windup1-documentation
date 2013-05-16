@@ -1,28 +1,28 @@
 Windup is a platform for creating migration rules.  We provide profilers, and you code rules to the profilers.  Some of the most important rules are *classifications* and *inline hints*.  
 
-### Classifications
+Classifications
+---------------
 
 Classifications are important because they tell developers very quickly *what* the resource is, so that they can quickly identify resources of importants.  For example, say you are responsible for migrating an application from Weblogic to JBoss it is useful to know that project is a Spring project.Or, to have the Weblogic descriptors identified and called out. This is what classifiers do - they identify resources, and add a classification to the resource.
 
 Classifications are displayed both at the 10,000 foot view, main report and also at the resource report level.
 
-***
-![Classifications on Resource](img/6-archive-overview.png)
-***
+image:6-archive-overview.png[Classifications on Resource]
 
 Out of the box, it is *very* simple to add classifications for Java and XML files.  The Windup community has found that this covers a large majority of Java Enterprise Edition application resources.  View the documents below for more information on adding rules for:
 
-* Section 6.1 [Java Classifications](6.1-Java-Classifications)
-* Section 6.3 [XML Classifications](6.3-XML-Classifications)
+* Section 6.1 link:6.1-Java-Classifications[Java Classifications]
+* Section 6.3 link:6.3-XML-Classifications[XML Classifications]
 
-### Inline Hints
+Inline Hints
+~~~~~~~~~~~~
 
 Windup takes the approach of profiling resources and providing syntactically highlighted resource reports.  The resource report will show the resource with potentially highlighted lines that may contain inline hints to help the developers migrate a piece of code.  
 
-![Inline Hint](img/6-java-hint1.png)
+image:6-java-hint1.png[Inline Hint]
 
 Adding inline hints for Java and XML are as simple as adding Regular Expressions or XPath Expressions to the Windup rules.  THe following documents describe that process for:
 
-* Section 6.2 [Java Hints](6.2-Java-Hints)
-* Section 6.2 [XML Hints](6.4-XML-Hints)
+* Section 6.2 link:6.2-Java-Hints[Java Hints]
+* Section 6.2 link:6.4-XML-Hints[XML Hints]
 

@@ -1,0 +1,102 @@
+Java hints may be something as simple as alerting a user to potential changes that may need to be made:
+
+image:6-java-hint1.png[Java Simple Hint]
+
+[source,xml]
+------------------
+<windup:java-hint source-type="CONSTRUCT" 
+        regex="javax.naming.InitialContext\(.+\)" 
+        hint="Ensure that the InitialContext connection properties do not need to change for JBoss" effort="1"/>
+------------------
+
+https://github.com/jboss-windup/windup/blob/master/windup-engine/src/main/resources/windup/java/java-config.windup.xml[View Rule]
+
+Markdown may be used to show a "rich text" hint. For example:
+
+image:6-java-hint2.png[Java Complex Hint]
+
+[source,xml]
+------------------
+<windup:java-hint source-type="METHOD" regex="((javax.naming.InitialContext)|(javax.naming.Context)).lookup" effort="1"> 
+    Ensure that the *JNDI Name* does not need to change for [JBoss](http://www.jboss.org).
+</windup:java-hint>
+------------------
+
+https://github.com/jboss-windup/windup/blob/master/windup-engine/src/main/resources/windup/java/java-config.windup.xml[View Rule]
+
+6.2.1 Hints Example
+~~~~~~~~~~~~~~~~~~~
+
+This example will go through creating a rule around Migrating Hibernate 3 to Hibernate 4. For more on migrating Hiberate, take a look at https://community.jboss.org/wiki/HibernateCoreMigrationGuide40[the Hibernate Core Migration Guide].
+
+At this point, it's helpful to refresh our understanding of Windup works when profiling Java. Windup will take a Java class file, loads its imports, and if any of the imports match any blacklisted classes defined in `jboss-windup.xml` Windup will decompile the class and profile it to look for how the blacklisted class is used, marking each line where the blacklist is used, and resolving all variables to the fully qualified class.
+
+`windup-java-config.xml` defines inline hints for what to do when certain blacklists are matched. For example:
+
+[source,xml]
+------------------
+<windup:java-hint 
+        source-type="CONSTRUCT" 
+        regex="javax.naming.InitialContext \ (.+ \ )" 
+        hint="Ensure that the InitialContext connection properties do not need to change for JBoss." 
+        effort="1" />
+------------------
+
+6.2.2 Java Hints
+~~~~~~~~~~~~~~~~
+
+The full schema can be found in the (https://github.com/jboss-windup/windup/blob/master/src/main/resources/namespace/windup.xsd:[windup.xsd]). We'll run through the key elements and attributes here. Attributes on the Java Hint include :
+
+hint (string)::
+  the inline hint to define the Java if the Regex matches
+effort (int)::
+  number of Story Points to implement estimated changes
+regex (regex)::
+  regular expression to match against, note, must match the fully qualified class name, not the classes short name
+source-type (enum | optional)::
+  filter to apply regex to only certain Java class uses
+
+In the above example, if a constructor matching the regular expression `javax.naming.InitialContext \\ (.+ \\ )` is used by any method in the class, a hint is put inline that states "Ensure that the InitialContext connection properties do not need to change for JBoss" and the number of story points is set to 1.
+
+Here's another example from the Hibernate migration guide:
+
+[source,xml]
+------------------
+<windup:java-hint 
+    source-type="METHOD" 
+    regex="org.hibernate.type.AbstractSingleColumnStandardBasicTypenullSafeGet \ (.+ \ )" 
+    hint="nullSafeGet must match nullSafeGet(ResultSet rs, String name, SessionImplementor session). in Hibernate 4." 
+    effort="1" />
+------------------
+
+We must also register `org.hibernate.type.AbstractSingleColumnStandardBasicType`as a blacklisted classes (in `jboss-windup.xml`), so that Windup will apply the Java Pattern Hint Processor when the class org.hibernate.type.AbstractSingleColumnStandardBasicType is imported.
+
+We ultimately want to put in all the blacklisted classes in for migrating from Hibernate 3 to Hibernate 4, and also add inline-hints for each!
+
+6.2.2.1 Source Type
+^^^^^^^^^^^^^^^^^^^
+
+The source-type can be:
+
+METHOD::
+  regex is only matched against method calls
+INHERITANCE::
+  regex is only matched and the hint applied against the classes supertypes
+TYPE::
+  regex is matched against only variables instances OR annotations
+CONSTRUCT::
+  regex is matched against only constructor calls
+IMPORT::
+  regex is matched against only import calls
+
+It you do not put the `source-type` property, the regex will match against any of the `source-type` listed above.  This is a good approach when you want to apply the same hint anywhere a specific `regex` is matched in a class.
+
+Java Hints must be nested within either a `<windup:hints>` tag within Classifications or Gates, or, more using an id. For example:
+
+[source,xml]
+------------------
+<windup:java-hints id="must-be-unique">
+    <windup:java-hint source-type="METHOD" regex="net.sf.hibernate.Session.find" hint="Deprecated by Hibernate 3, moved to org.hibernate.classic -- use createQuery()" effort="2"/>
+</windup:java-hints>
+------------------
+

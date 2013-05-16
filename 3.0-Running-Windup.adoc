@@ -1,0 +1,88 @@
+3.1 Running Windup
+------------------
+
+Windup can run against both source projects, and compiled projects.  In order to execute against compiled projects, you are required to have a decompiler installed, and Windup must be able to communicate with the decompiler.  Since there aren't any open source decompilers that support Java 1.5, Windup does not package a decompiler.  
+
+Want to see Windup with out of the box support for EAR, JAR, or WAR files?  Contribute to https://github.com/bradsdavis/candle-decompiler[Candle Open Source Java Decompiler]!
+
+3.1.1 Source Projects
+~~~~~~~~~~~~~~~~~~~~~
+
+There are no prerequisites to run against source projects.  Just make sure to include to command line argument `-source true` and point the `-input` parameter at the directory containing your source!  Make sure to include an `output` directory for the Windup report! 
+
+3.1.2 Compiled Projects
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Running Windup against compiled EAR, WAR, and JAR files requires a decompiler.  Windup does not include a decompiler with the distribution, since there are no open source decompilers.  However, if you are interested in running against a large number of EAR, WAR, or JAR files, you will need to install one.  Several great command-line capable decompilers include: 
+
+* JAD
+* Fernflower
+
+Out of the box, if you include JAD on the system path, Windup will execute JAD for decompilation. 
+
+[NOTE]
+Do not use a path that contains folder names with spaces.
+
+3.2 Command Line Arguments
+--------------------------
+
+* From the command line:  `java -jar windup-cli.jar`
+
+3.2.1 Required Arguments
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+[options="header", cols="1,2"]
+|==========================
+|Command Line Argument|Description
+|`-input <file>` or `-input <dir>`|file / directory of files to generate windup reports (required)
+|`-javaPkgs <string>`|client Java packages to target for inspection, separate packages with `:` (required)
+|`-output <dir>`|directory where to generate Windup report
+|`-source <boolean>`|whether to run in recursive folder mode, against Java, JSP, and XML files.  By default, Windup tries to run on compiled Class files.  This allows Windup to run against Java files.  The output parameter is required for this setting.
+|==========================
+
+
+3.2.2 Optional Arguments
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+[options="header", cols="1,2"]
+|==========================
+|Command Line Argument|Description
+|`-captureLog <boolean>`|persist to file
+|`-logLevel <enum>`|INFO, DEBUG, WARN, ERROR, FATAL
+|`-fetchRemote <boolean>`|fetch remote POMs for unknown JAR files; if you are running Windup without an internet connection, this can be set to `false`.
+|==========================
+
+3.3 Examples
+------------
+
+3.3.1 Running Windup On Compiled Projects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Batch Run (most common)::
+  The following will run Windup against all zip archives in the folder following `-input`, and will analyze classes in the `org.example` and `org.another packages`. 
+
+----------------
+java -jar windup-cli.jar -input /Users/bdavis/Projects/migrations/example -javaPkgs org.example:org.another
+----------------
+
+[NOTE]
+=====================================================================
+the "-output" parameter is ignored in batch mode.
+=====================================================================
+
+
+Single Run::
+  The following will run Windup against the specific Zip following the `-input`, and the report will be output in the `-output` directory.
+
+----------------
+java -jar windup-cli.jar \
+    -input /Users/bdavis/Projects/migrations/example.ear \
+    -output /Users/bdavis/Projects/migrations/example/example-doc \
+    -javaPkgs org.example:org.another
+----------------
+
+3.4 Testing New Rules
+---------------------
+
+Adding new rules to Windup is easy!  Just follow the directions in the next section - link:4.0-Extending-Windup-Rules[Windup Extensions]!
+
