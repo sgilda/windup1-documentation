@@ -9,7 +9,7 @@ image:6-java-hint1.png[Java Simple Hint]
         hint="Ensure that the InitialContext connection properties do not need to change for JBoss" effort="1"/>
 ------------------
 
-https://github.com/jboss-windup/windup/blob/master/windup-engine/src/main/resources/windup/java/java-config.windup.xml[View Rule]
+https://github.com/windup/windup/blob/master/windup-engine/src/main/resources/windup/java/java-config.windup.xml[View Rule]
 
 Markdown may be used to show a "rich text" hint. For example:
 
@@ -22,7 +22,7 @@ image:6-java-hint2.png[Java Complex Hint]
 </windup:java-hint>
 ------------------
 
-https://github.com/jboss-windup/windup/blob/master/windup-engine/src/main/resources/windup/java/java-config.windup.xml[View Rule]
+https://github.com/windup/windup/blob/master/windup-engine/src/main/resources/windup/java/java-config.windup.xml[View Rule]
 
 6.2.1 Hints Example
 ~~~~~~~~~~~~~~~~~~~
@@ -45,7 +45,7 @@ At this point, it's helpful to refresh our understanding of Windup works when pr
 6.2.2 Java Hints
 ~~~~~~~~~~~~~~~~
 
-The full schema can be found in the (https://github.com/jboss-windup/windup/blob/master/src/main/resources/namespace/windup.xsd:[windup.xsd]). We'll run through the key elements and attributes here. Attributes on the Java Hint include :
+The full schema can be found in the (https://github.com/windup/windup/blob/master/src/main/resources/namespace/windup.xsd:[windup.xsd]). We'll run through the key elements and attributes here. Attributes on the Java Hint include :
 
 hint (string)::
   the inline hint to define the Java if the Regex matches

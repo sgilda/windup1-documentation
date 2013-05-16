@@ -3,7 +3,7 @@ Within the Windup report, the high level report will show files within archives 
 image:6-java-classification-1.png[Java Classfication]
 
 [source,xml]
-.https://github.com/jboss-windup/windup/blob/master/windup-engine/src/main/resources/windup/java/java-ejb-config.windup.xml[View Rule]
+.https://github.com/windup/windup/blob/master/windup-engine/src/main/resources/windup/java/java-ejb-config.windup.xml[View Rule]
 --------------------------
 <windup:java-classification 
         source-type="INHERITANCE" 
@@ -32,7 +32,7 @@ The simple XML below (included in `windup-java-ejb-config.xml`) shows how the Ja
 6.1.2 Classifications
 ~~~~~~~~~~~~~~~~~~~~~
 
-The full schema can be found in the ([windup.xsd](https://github.com/jboss-windup/windup/blob/master/src/main/resources/namespace/windup.xsd)). We'll run through the key ones here. Attributes on the Java Classification include:
+The full schema can be found in the ([windup.xsd](https://github.com/windup/windup/blob/master/src/main/resources/namespace/windup.xsd)). We'll run through the key ones here. Attributes on the Java Classification include:
 
 description (string)::
   the classification to define the Java if the Regex matches

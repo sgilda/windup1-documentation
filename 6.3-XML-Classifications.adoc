@@ -21,7 +21,7 @@ Using the xpath-classification, Windup will read an XML file, and try and match 
 </windup:xpath-classification>
 ------------------
 
-The full schema can be found in the (https://github.com/jboss-windup/windup/blob/master/src/main/resources/namespace/windup.xsd[windup.xsd]). We'll run through the key elements and attributes here:
+The full schema can be found in the (https://github.com/windup/windup/blob/master/src/main/resources/namespace/windup.xsd[windup.xsd]). We'll run through the key elements and attributes here:
 
 description (string)::
   the classification to define the XML if the XPath matches
